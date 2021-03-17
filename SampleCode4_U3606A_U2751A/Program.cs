@@ -85,7 +85,7 @@ namespace SampleCode4_U3606A_U2751A
 
             value = current_meas.average;
 
-            Console.WriteLine(string.Format("Obtain the average result of PerformCurrentTest: {0} mA", value));
+            Console.WriteLine(string.Format("Obtain the average result of PerformCurrentTest: {0} mA on CH{1}", value, channel));
 
             return value;
         }
