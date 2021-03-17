@@ -55,8 +55,12 @@ namespace SampleCode4_U3606A_U2751A
                 Console.WriteLine("");
                 try
                 {
-                    //Perform Current Test on CH1
-                    PerformCurrentTest(dmm,sw, 1);
+                    //Perform Current Test on CH1 to CH8
+                    for (int i = 0; i < 8; i++)
+                    {
+                        PerformCurrentTest(dmm, sw, i+1);
+                    }
+                    
                     
 
                     
@@ -85,7 +89,7 @@ namespace SampleCode4_U3606A_U2751A
 
             value = current_meas.average;
 
-            Console.WriteLine(string.Format("Obtain the average result of PerformCurrentTest: {0} mA on CH{1}", value, channel));
+            Console.WriteLine(string.Format("Obtain the average result of PerformCurrentTest: {0} mA on CH{1}", Math.Round(value*1000,4), channel));
 
             return value;
         }
