@@ -9,12 +9,7 @@ namespace SampleCode4_U3606A_U2751A
 {
     class Program
     {
-        public struct current
-        {
-            public double max;
-            public double min;
-            public double average;
-        }
+        
 
         static void Main(string[] args)
         {
@@ -55,15 +50,23 @@ namespace SampleCode4_U3606A_U2751A
                 Console.WriteLine("");
                 try
                 {
+                    Console.WriteLine("Perform Current Test on CH1 to CH8");
                     //Perform Current Test on CH1 to CH8
                     for (int i = 0; i < 8; i++)
                     {
                         PerformCurrentTest(dmm, sw, i+1);
                     }
-                    
-                    
 
-                    
+                    Console.WriteLine("");
+
+                    Console.WriteLine("Perform Voltage Test on CH1 to CH8");
+
+                    //Perform Voltage Test on CH1 to CH8
+                    for (int i = 0; i < 8; i++)
+                    {
+                        PerformVoltageTest(dmm, sw, i + 1);
+                    }
+
                 }
                 catch (Exception ex)
                 {
@@ -85,6 +88,7 @@ namespace SampleCode4_U3606A_U2751A
 
             sw.SetRelayWellA_byCH(channel, true);
 
+
             current_meas = dmm.MeasureChannelCurrent(500,500);
 
             value = current_meas.average;
@@ -93,5 +97,24 @@ namespace SampleCode4_U3606A_U2751A
 
             return value;
         }
+
+        private static double PerformVoltageTest(MultiMeter dmm, Agilent sw, int channel)
+        {
+            double value = -1.0;
+
+            MultiMeter.volt volt_meas;
+
+            sw.SetRelayWellA_byCH(channel, true);
+
+
+            volt_meas = dmm.MeasureChannelVoltage(500, 500);
+
+            value = volt_meas.average;
+
+            Console.WriteLine(string.Format("Obtain the average result of PerformVoltageTest: {0} V on CH{1}", Math.Round(value, 4), channel));
+
+            return value;
+        }
+
     }
 }
